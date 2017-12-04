@@ -1,0 +1,19 @@
+ch_add_sources(
+  test_root.c
+  test_sequence_001.c
+  test_sequence_002.c
+  test_sequence_003.c
+  test_sequence_004.c
+  test_sequence_005.c
+  test_sequence_006.c
+  test_sequence_007.c
+  test_sequence_008.c
+  test_sequence_009.c
+  test_sequence_010.c
+  test_sequence_011.c
+  test_sequence_012.c
+  )
+
+ch_add_include_directories(
+  .
+  )
