@@ -487,6 +487,10 @@ typedef struct {
    * @brief Receive error callback.
    */
   uartecb_t                 rxerr_cb;
+  /**
+   * @brief Idle line detected callback. HW timeouts not supported.
+   */
+  uartcb_t                 timeout_cb;
   /* End of the mandatory fields.*/
   /**
    * @brief Bit rate.
