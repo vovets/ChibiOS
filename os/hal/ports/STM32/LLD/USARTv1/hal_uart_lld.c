@@ -298,6 +298,13 @@ static void serve_usart_irq(UARTDriver *uartp) {
   sr = u->SR;   /* SR reset step 1.*/
   (void)u->DR;  /* SR reset step 2.*/
 
+  /* uartp->lastSr[0] = uartp->lastSr[1]; */
+  /* uartp->lastSr[1] = sr; */
+
+  chSysLockFromISR();
+  chDbgWriteTraceI((void*)sr, (void*)cr1);
+  chSysUnlockFromISR();
+  
   if (sr & (USART_SR_LBD | USART_SR_ORE | USART_SR_NE |
             USART_SR_FE  | USART_SR_PE)) {
     u->SR = ~USART_SR_LBD;
