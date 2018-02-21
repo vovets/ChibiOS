@@ -291,15 +291,14 @@ static void uart_lld_serve_tx_end_irq(UARTDriver *uartp, uint32_t flags) {
  * @param[in] uartp     pointer to the @p UARTDriver object
  */
 static void serve_usart_irq(UARTDriver *uartp) {
-  uint16_t sr;
   USART_TypeDef *u = uartp->usart;
   uint32_t cr1 = u->CR1;
-
-  sr = u->SR;   /* SR reset step 1.*/
-  (void)u->DR;  /* SR reset step 2.*/
+  uint16_t sr = u->SR;
 
   if (sr & (USART_SR_LBD | USART_SR_ORE | USART_SR_NE |
             USART_SR_FE  | USART_SR_PE)) {
+    (void)u->SR;   /* SR reset step 1.*/
+    (void)u->DR;  /* SR reset step 2.*/
     u->SR = ~USART_SR_LBD;
     _uart_rx_error_isr_code(uartp, translate_errors(sr));
   }
@@ -315,6 +314,8 @@ static void serve_usart_irq(UARTDriver *uartp) {
 
   /* Idle line interrupt sources are only checked if enabled in CR1.*/
   if ((cr1 & USART_CR1_IDLEIE) && (sr & USART_SR_IDLE)) {
+    (void)u->SR;   /* SR reset step 1.*/
+    (void)u->DR;  /* SR reset step 2.*/
     _uart_timeout_isr_code(uartp);
   }
 }
