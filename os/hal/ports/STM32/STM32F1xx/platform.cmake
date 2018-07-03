@@ -14,4 +14,5 @@ ch_include(
   ../LLD/TIMv1/driver.cmake
   ../LLD/DMAv1/driver.cmake
   ../LLD/USARTv1/driver.cmake
+  ../LLD/SPIv1/driver.cmake
   )
