@@ -15,4 +15,5 @@ ch_include(
   ../LLD/DMAv1/driver.cmake
   ../LLD/USARTv2/driver.cmake
   ../LLD/SPIv2/driver.cmake
+  ../LLD/ADCv1/driver.cmake
   )
